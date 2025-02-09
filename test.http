@@ -1,0 +1,66 @@
+### Test server
+GET http://localhost:3000/test
+
+### Register new user (with new email)
+POST http://localhost:3000/api/users/register
+Content-Type: application/json
+
+{
+    "email": "user789@example.com",
+    "password": "password123",
+    "companyName": "Test Company"
+}
+
+### Login with new user
+POST http://localhost:3000/api/users/login
+Content-Type: application/json
+
+{
+    "email": "user789@example.com",
+    "password": "password123",
+    "companyName": "Test Company"
+}
+
+### Create a catalog item
+POST http://localhost:3000/api/catalog
+Content-Type: application/json
+
+{
+    "description": "Web Development Service",
+    "model": "WEB-001",
+    "unit": "hours",
+    "price": 100,
+    "notes": "Standard web development rate"
+}
+
+### Get all catalog items
+GET http://localhost:3000/api/catalog
+
+### Create a quote
+POST http://localhost:3000/api/quotes
+Content-Type: application/json
+
+{
+    "title": "Website Development Project",
+    "companyName": "Client Company Ltd",
+    "contactName": "John Doe",
+    "contactPhone": "123-456-7890",
+    "contactEmail": "john@clientcompany.com",
+    "items": [
+        {
+            "description": "Frontend Development",
+            "quantity": 40,
+            "price": 100,
+            "model": "WEB-001"
+        },
+        {
+            "description": "Backend Development",
+            "quantity": 30,
+            "price": 120,
+            "model": "WEB-002"
+        }
+    ]
+}
+
+### Get all quotes
+GET http://localhost:3000/api/quotes
