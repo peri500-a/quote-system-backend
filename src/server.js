@@ -22,6 +22,10 @@ app.use(express.json());
 app.use('/api/users', userRoutes);
 app.use('/api/quotes', quoteRoutes);
 app.use('/api/catalog', catalogRoutes);
+// Add this with your other routes
+app.get('/', (req, res) => {
+  res.json({ message: 'Quote System API is running' });
+});
 
 // Basic test route
 app.get('/test', (req, res) => {
