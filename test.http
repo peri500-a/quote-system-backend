@@ -1,8 +1,9 @@
 ### Test server
-GET http://localhost:3000/test
+
+GET https://quote-system-backend-qoa7.onrender.com/
 
 ### Register new user (with new email)
-POST http://localhost:3000/api/users/register
+POST https://quote-system-backend-qoa7.onrender.com/
 Content-Type: application/json
 
 {
