@@ -1,9 +1,10 @@
 ### Test server
-
 GET https://quote-system-backend-qoa7.onrender.com/
 
+GET https://quote-system-backend-qoa7.onrender.com/test
+
 ### Register new user (with new email)
-POST https://quote-system-backend-qoa7.onrender.com/
+POST https://quote-system-backend-qg0o.onrender.com/api/users/register
 Content-Type: application/json
 
 {
@@ -13,13 +14,12 @@ Content-Type: application/json
 }
 
 ### Login with new user
-POST http://localhost:3000/api/users/login
+POST https://quote-system-backend-qg0o.onrender.com/api/users/login
 Content-Type: application/json
 
 {
     "email": "user789@example.com",
-    "password": "password123",
-    "companyName": "Test Company"
+    "password": "password123"
 }
 
 ### Create a catalog item
