@@ -11,7 +11,6 @@ router.post('/register', async (req, res) => {
   try {
     const { email, password, companyName } = req.body;
 
-    // Check if user exists
     const existingUser = await prisma.user.findUnique({
       where: { email }
     });
@@ -20,10 +19,8 @@ router.post('/register', async (req, res) => {
       return res.status(400).json({ error: 'User already exists' });
     }
 
-    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create company and user
     const result = await prisma.$transaction(async (prisma) => {
       const company = await prisma.company.create({
         data: {
@@ -43,13 +40,19 @@ router.post('/register', async (req, res) => {
       return { user, company };
     });
 
-    // Generate token
     const token = jwt.sign(
       { userId: result.user.id },
       process.env.JWT_SECRET,
       { expiresIn: '24h' }
     );
-    // Add this with your other routes in users.js
+
+    res.json({ token, user: result.user });
+  } catch (error) {
+    res.status(500).json({ error: 'Error creating user' });
+  }
+});
+
+// Login route
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -76,12 +79,6 @@ router.post('/login', async (req, res) => {
     res.json({ token, user: { id: user.id, email: user.email } });
   } catch (error) {
     res.status(500).json({ error: 'Error during login' });
-  }
-});
-
-    res.json({ token, user: result.user });
-  } catch (error) {
-    res.status(500).json({ error: 'Error creating user' });
   }
 });
 
